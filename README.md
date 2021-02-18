@@ -2,6 +2,13 @@
 
 [![Compile Examples Status](https://github.com/arduino-libraries/ArduinoBLE/workflows/Compile%20Examples/badge.svg)](https://github.com/arduino-libraries/ArduinoBLE/actions?workflow=Compile+Examples) [![Spell Check Status](https://github.com/arduino-libraries/ArduinoBLE/workflows/Spell%20Check/badge.svg)](https://github.com/arduino-libraries/ArduinoBLE/actions?workflow=Spell+Check)
 
+---
+## Changes compared to upsteam
+- **BLEAutoSubscribe** property to auto-subscribe central to value notifications, even if not explicitly requested
+- [Connectivity fix](https://gitmemory.com/issue/arduino-libraries/ArduinoBLE/45/567536682)
+
+---
+
 Enables BLE connectivity on the Arduino MKR WiFi 1010, Arduino UNO WiFi Rev.2, Arduino Nano 33 IoT, and Arduino Nano 33 BLE.
 
 This library supports creating a BLE peripheral and BLE central mode.
