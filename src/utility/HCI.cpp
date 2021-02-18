@@ -415,7 +415,9 @@ int HCIClass::leConnUpdate(uint16_t handle, uint16_t minInterval, uint16_t maxIn
 
 int HCIClass::sendAclPkt(uint16_t handle, uint8_t cid, uint8_t plen, void* data)
 {
+  int k = 0;
   while (_pendingPkt >= _maxPkt) {
+    if ( k < _maxPkt) k++; else break;
     poll();
   }
 
