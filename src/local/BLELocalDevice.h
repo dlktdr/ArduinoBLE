@@ -78,7 +78,7 @@ public:
 
   virtual void setTimeout(unsigned long timeout);
 
-  virtual void debug(Stream& stream);
+  virtual void debug(arduino::Stream& stream);
   virtual void noDebug();
   
 protected:
