@@ -118,6 +118,7 @@ static void bleLoop()
     mbed::LowPowerTimer timer;
 
     timer.start();
+    int sleepskips=0;
 
     while (true) {
         last_update_us += (uint64_t) timer.read_high_resolution_us();
@@ -146,6 +147,7 @@ static void bleLoop()
 
         /* don't bother sleeping if we're already past tick */
         if (sleep && (WSF_MS_PER_TICK * 1000 > time_spent)) {
+            sleepskips = 0;
             /* sleep to maintain constant tick rate */
             uint64_t wait_time_us = WSF_MS_PER_TICK * 1000 - time_spent;
             uint64_t wait_time_ms = wait_time_us / 1000;
@@ -158,6 +160,12 @@ static void bleLoop()
 
             if (wait_time_us) {
               wait_us(wait_time_us);
+            }
+        } else {
+            sleepskips++;
+            if(sleepskips == 5) {
+                rtos::ThisThread::sleep_for(30);
+                sleepskips = 0;
             }
         }
     }
@@ -217,6 +225,7 @@ int HCICordioTransportClass::begin()
 
   if (bleLoopThread == NULL) {
     bleLoopThread = new rtos::Thread();
+    bleLoopThread = new rtos::Thread(osPriorityHigh);
     bleLoopThread->start(bleLoop);
   }
 
